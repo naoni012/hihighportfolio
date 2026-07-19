@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HONG — Visual Director Portfolio. Virtual Production, AI Film, 3D Interactive Experience." />
+  <meta property="og:title" content="HONG — Visual Director Portfolio" />
+  <meta property="og:description" content="Hamon, Re, Summer, Danjo — selected works in visual direction and new content." />
+  <meta property="og:type" content="website" />
+  <title>HONG — Visual Director Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="#top" class="brand" aria-label="홈으로 이동">HONG</a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div id="three-stage" class="three-stage" aria-label="세 프로젝트를 상징하는 3D 인터랙티브 오브젝트">
+        <div class="stage-loading">3D EXPERIENCE LOADING</div>
+        <div class="stage-hint">DRAG TO ROTATE · CLICK A PROJECT</div>
+      </div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">VISUAL DIRECTOR · NEW CONTENT CREATOR</p>
+        <h1>Ideas become<br><span>experiences.</span></h1>
+        <p>
+          버추얼 프로덕션, AI 영상, 3D 인터랙션을 결합해<br class="desktop-break">
+          장면을 넘어 기억에 남는 콘텐츠 경험을 설계합니다.
+        </p>
+        <a class="text-link" href="#projects">View selected projects <span>↘</span></a>
+      </div>
+
+      <div class="project-rail" aria-label="프로젝트 바로가기">
+        <button type="button" class="rail-item active" data-project="hamon">
+          <span>01</span><strong>HAMON</strong><small>VP · CHARACTER IP</small>
+        </button>
+        <button type="button" class="rail-item" data-project="resummer">
+          <span>02</span><strong>RE, SUMMER</strong><small>AI SHORT FILM</small>
+        </button>
+        <button type="button" class="rail-item" data-project="danjo">
+          <span>03</span><strong>DANJO</strong><small>AI CINEMATIC</small>
+        </button>
+      </div>
+    </section>
+
+    <section id="projects" class="projects section-pad">
+      <div class="section-intro reveal">
+        <p class="eyebrow">SELECTED PROJECTS · 2026</p>
+        <h2>서로 다른 기술을<br>하나의 연출 언어로.</h2>
+      </div>
+
+      <article id="hamon" class="project project-hamon reveal" data-accent="#bda6e8">
+        <div class="project-number">01</div>
+        <div class="project-visual">
+          <video controls playsinline preload="metadata" poster="assets/images/hamon-poster.jpg">
+            <source src="assets/videos/hamon-mainfilm.mp4" type="video/mp4" />
+          </video>
+          <div class="asset-fallback">
+            <strong>HAMON</strong>
+            <span>assets/videos/hamon-mainfilm.mp4</span>
+          </div>
+        </div>
+        <div class="project-copy">
+          <p class="project-kicker">VP FILM · CHARACTER IP · SHOWCASE</p>
+          <h3>HAMON</h3>
+          <p class="project-summary">한 아티스트의 세계관에서 출발해 캐릭터 굿즈와 오프라인 쇼케이스 경험으로 확장한 버추얼 프로덕션 프로젝트.</p>
+          <p class="project-description">LED Wall VP와 크로마키 촬영을 기반으로 비주얼 필름을 제작했습니다. 캐릭터 디자인, 배우 섭외, 소품 및 공간 구성, 현장 디렉팅, 스토리보드 수정, 3D 프린팅 굿즈와 NFC 웹 경험까지 프로젝트 전반을 연결했습니다.</p>
+          <dl class="meta">
+            <div><dt>ROLE</dt><dd>Director · Visual Director · IP Planning</dd></div>
+            <div><dt>TOOLS</dt><dd>Unreal Engine · Blender · Premiere Pro · AI Tools</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article id="resummer" class="project project-resummer reveal" data-accent="#93cdd0">
+        <div class="project-number">02</div>
+        <div class="project-visual">
+          <video controls playsinline preload="metadata" poster="assets/images/resummer-poster.jpg">
+            <source src="assets/videos/resummer-mainfilm.mp4" type="video/mp4" />
+          </video>
+          <div class="asset-fallback">
+            <strong>RE, SUMMER</strong>
+            <span>assets/videos/resummer-mainfilm.mp4</span>
+          </div>
+        </div>
+        <div class="project-copy">
+          <p class="project-kicker">AI SHORT FILM · VISUAL STORYTELLING</p>
+          <h3>RE, SUMMER</h3>
+          <p class="project-summary">종이 나비, 오래된 방, 계절의 흔적을 통해 ‘다시 앞으로 나아가는 여름’을 시각화한 AI 단편.</p>
+          <p class="project-description">캐릭터와 공간의 일관성을 설계하고, 컷별 구도·행동·빛의 변화를 이미지와 영상 생성 파이프라인으로 구현했습니다. AI의 우연성을 통제 가능한 연출 요소로 바꾸는 데 집중했습니다.</p>
+          <dl class="meta">
+            <div><dt>ROLE</dt><dd>Director · Storyboard · AI Visual Development</dd></div>
+            <div><dt>TOOLS</dt><dd>Google Omni · Kling · Seedance · Premiere Pro</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article id="danjo" class="project project-danjo reveal" data-accent="#d6a269">
+        <div class="project-number">03</div>
+        <div class="project-visual">
+          <video controls playsinline preload="metadata" poster="assets/images/danjo-poster.jpg">
+            <source src="assets/videos/danjo-mainfilm.mp4" type="video/mp4" />
+          </video>
+          <div class="asset-fallback">
+            <strong>DANJO</strong>
+            <span>assets/videos/danjo-mainfilm.mp4</span>
+          </div>
+        </div>
+        <div class="project-copy">
+          <p class="project-kicker">AI CINEMATIC · CHARACTER CONSISTENCY</p>
+          <h3>DANJO</h3>
+          <p class="project-summary">불과 금속, 인물의 움직임을 중심으로 구축한 판타지 단조 시네마틱 비주얼 프로젝트.</p>
+          <p class="project-description">캐릭터 시트와 소품 레퍼런스를 기준으로 인물·의상·무기 형태의 일관성을 유지하고, 모루를 두드리는 동작과 카메라 앵글을 시네마틱 시퀀스로 설계했습니다.</p>
+          <dl class="meta">
+            <div><dt>ROLE</dt><dd>Visual Director · AI Cinematic Direction</dd></div>
+            <div><dt>TOOLS</dt><dd>AI Image / Video · Prompt Design · Editing</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section id="about" class="about section-pad reveal">
+      <div>
+        <p class="eyebrow">ABOUT</p>
+        <h2>기술을 배우는 데서 멈추지 않고,<br>콘텐츠 언어로 번역합니다.</h2>
+      </div>
+      <div class="about-body">
+        <p>영상 연출, 비주얼 디렉팅, 버추얼 프로덕션과 AI 생성 기술을 연결합니다. 아이디어를 스토리보드와 프리비즈로 구조화하고, 촬영과 후반, IP 확장까지 실제 실행 가능한 경험으로 설계하는 데 강점이 있습니다.</p>
+        <div class="skills">
+          <span>Visual Direction</span><span>Virtual Production</span><span>Unreal Engine</span><span>Blender</span><span>AI Image / Video</span><span>Premiere Pro</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact section-pad reveal">
+      <p class="eyebrow">CONTACT</p>
+      <h2>Let’s create the next experience.</h2>
+      <a href="mailto:your@email.com">your@email.com</a>
+      <p class="edit-note">제출 전 이메일 주소를 수정하세요.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 HONG</span>
+    <a href="#top">BACK TO TOP ↑</a>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
