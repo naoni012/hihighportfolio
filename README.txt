@@ -11,9 +11,12 @@ hero → #danjo(鍛造) → #summer(Summer, Again) → #hamon(하몽) → #about
 ※ 섹션 id "resummer"는 "summer"로 변경되었고, script.js의 projectData.resummer.target도 '#summer'로 함께 수정했습니다.
    레일 버튼의 data-project 값(hamon / resummer / danjo)은 3D 연동 키이므로 변경하지 않았습니다.
 
+[적용된 유튜브 영상]
+- #danjo: https://www.youtube.com/embed/L3py_5rTnaA?rel=0
+- #summer: https://www.youtube.com/embed/c-QibHWwHbk?rel=0
+- #hamon: https://www.youtube.com/embed/Bpn1hvm-twk?rel=0
+
 [채워야 할 플레이스홀더]
-- [YOUTUBE_UNLISTED_URL_단조]  → #danjo 영상 자리. HTML 주석의 iframe 스니펫으로 교체
-- [YOUTUBE_UNLISTED_URL_summer] → #summer 영상 자리. 동일 방식
 - [비교 스틸 언리얼 vs AI] / [비주얼 개발 …] / [현장 스틸 이미지] / [문서 이미지 1~4] / [초기 스케치·시안 발전·수정안·최종 캐릭터 시트]
   → .img-placeholder div를 <img src="assets/images/파일명.jpg" alt="설명"> 으로 교체
 - [EMAIL] / [NOTION_URL] / [SHOWREEL_URL] → #contact의 dd 내용 교체
