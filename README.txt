@@ -1,5 +1,5 @@
-HONG — VISUAL DIRECTOR PORTFOLIO
-최종 업데이트: 4차 (실제 이미지 전량 반영 + 가독성 개선)
+VISUAL DIRECTOR PORTFOLIO
+최종 업데이트: 5차 (프로젝트 순서·문서 가독성·한글 줄바꿈 개선)
 
 ────────────────────────────────
 1. 폴더 구조 (이 구조 그대로 업로드)
@@ -21,7 +21,7 @@ assets/images/*.jpg   (19장)
 ────────────────────────────────
 3. 구조
 ────────────────────────────────
-hero → #danjo(鍛造) → #summer(Summer, Again) → #hamon(하몽) → #about → #skills → #proposal → #contact
+hero → #hamon(하몽) → #danjo(鍛造) → #summer(Summer, Again) → #about → #skills → #proposal → #contact
 · 히어로 3D: 하몽 캐릭터는 GLB 실물 모델, 나머지 2개는 절차적 조형
 · 레일 버튼 data-project 값(hamon/resummer/danjo)은 3D 연동 키 — 변경 금지
 · 섹션 id "resummer" → "summer"로 변경, script.js의 projectData.resummer.target도 '#summer'로 동기화됨
@@ -47,7 +47,6 @@ hero → #danjo(鍛造) → #summer(Summer, Again) → #hamon(하몽) → #about
 
 [하몽]
  hamon-set-vp.jpg / hamon-set-led.jpg  ← 현장 사진 2종
- hamon-comp.jpg                        ← 합성 적용 화면
  char-1-sketch → char-2-dev → char-3-sheet → char-4-final  ← 캐릭터 디벨롭 4단계
  doc-staff-timeline / doc-vp-timeline / doc-callsheet / doc-chromakey-rules
  doc-storyboard-1 / doc-storyboard-2   ← 콘티 Ver2.3 PDF p1, p3
@@ -68,3 +67,12 @@ hero → #danjo(鍛造) → #summer(Summer, Again) → #hamon(하몽) → #about
 ────────────────────────────────
 더 좋은 소스가 생기면 같은 파일명으로 assets/images/에 덮어쓰면 됩니다(HTML 수정 불필요).
 권장 규격: 문서·캐릭터 4:3, 스틸 16:9, 가로 1100~1400px, JPG 85~90%.
+
+────────────────────────────────
+7. 이번 수정 사항
+────────────────────────────────
+· 잘못된 이름 표기 제거
+· 프로젝트 순서: 하몽 → 鍛造 → Summer, Again
+· Summer / 하몽 문서 이미지를 2열로 확대하고 클릭 확대 기능 추가
+· 문서 캡션 겹침, 한글 글자 단위 줄바꿈, 긴 프로젝트 제목 가독성 수정
+· 하몽 마지막 합성 적용 화면(hamon-comp.jpg) 사이트에서 제거

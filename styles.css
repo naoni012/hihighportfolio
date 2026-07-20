@@ -265,3 +265,87 @@ body{font-size:16.5px;line-height:1.72;-webkit-font-smoothing:antialiased;letter
   .block{margin-top:44px}
   .meta-wide div{grid-template-columns:1fr;gap:4px;padding:12px 0}
 }
+
+
+/* =========================================================
+   5차 수정 — 이름 제거 / 콘텐츠 우선순위 / 문서 가독성 / 한글 줄바꿈
+   ========================================================= */
+
+/* 한글이 글자 단위로 잘리지 않도록 하고, 제목은 의도한 덩어리로 줄바꿈 */
+html{word-break:keep-all}
+body{overflow-wrap:break-word}
+h1,h2,h3,h4,.project-summary,.project-description,.block-lead,.status-note,
+.about-body p,.proposal-body,.honest-note,.meta-wide dd,.system-list span,.process p,
+.gallery-caption,.doc-shot figcaption,.dev-note{text-wrap:pretty;word-break:keep-all}
+h1,h2,h3,.proposal-title-sub{text-wrap:balance}
+
+/* 잘못된 고정 높이 때문에 문서 이미지와 캡션이 겹치던 문제 수정 */
+img,video{height:auto}
+
+/* 헤더는 일반적인 포트폴리오 라벨만 사용 */
+.brand{font-size:11px;letter-spacing:.18em}
+
+/* 긴 프로젝트 제목을 2단 위계로 정리 */
+.project-v2 h3{max-width:24ch;font-size:clamp(32px,3.2vw,50px);line-height:1.12}
+.project-title-sub{display:inline-block;margin-top:.35em;font-size:.57em;line-height:1.4;letter-spacing:-.02em;color:#4c4c4c;font-weight:500}
+.project-head{max-width:900px}
+.project-body{max-width:1040px}
+
+/* 제안 섹션의 긴 제목도 의미 단위로 분리 */
+.proposal h2{max-width:24ch;line-height:1.12}
+.proposal-title-sub{display:inline-block;margin-top:.28em;color:#222}
+.proposal-format{display:block;margin-top:14px;font-size:.36em;line-height:1.4;letter-spacing:.08em;color:#777;font-weight:600}
+
+/* Summer / 하몽 문서 섹션: 작은 3열 카드 대신 읽을 수 있는 2열 */
+.doc-gallery{margin-top:44px}
+.doc-grid,.doc-grid-3,.doc-grid-hamon{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 24px;align-items:start}
+.doc-grid-3 .doc-shot-featured{grid-column:1/-1}
+.doc-shot{margin:0;min-width:0;display:flex;flex-direction:column;gap:12px}
+.doc-shot img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;object-position:center;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fafaf8;cursor:zoom-in;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.doc-shot img:hover,.doc-shot img:focus-visible{transform:translateY(-2px);border-color:#bcbcbc;box-shadow:0 14px 35px rgba(0,0,0,.08);outline:none}
+.doc-shot-wide{grid-column:1/-1}
+.doc-shot-wide img{aspect-ratio:16/10}
+.doc-shot figcaption{margin:0;font-size:13px;line-height:1.55;color:#444;letter-spacing:-.01em}
+.gallery-caption{margin:22px 0 0;font-size:14px;line-height:1.65;color:#3f3f3f;font-weight:500}
+.zoom-hint{margin:8px 0 0;font-size:11px;line-height:1.5;color:#8a8a8a;letter-spacing:.01em}
+.zoom-hint-before{margin:0 0 18px}
+
+/* 하몽 현장 이미지는 기존 비율 유지 */
+.set-grid img{height:100%}
+
+/* 문서 확대 보기 */
+.image-lightbox{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:44px;background:rgba(8,8,8,.88);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s ease}
+.image-lightbox.is-open{opacity:1;visibility:visible;pointer-events:auto}
+.image-lightbox figure{margin:0;max-width:min(1400px,94vw);max-height:90vh;display:flex;flex-direction:column;gap:12px;align-items:center}
+.image-lightbox img{display:block;width:auto;max-width:100%;height:auto;max-height:82vh;object-fit:contain;border-radius:8px;background:#fff;box-shadow:0 20px 70px rgba(0,0,0,.35)}
+.image-lightbox figcaption{color:#fff;font-size:13px;line-height:1.5;text-align:center}
+.lightbox-close{position:absolute;top:18px;right:24px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:32px;line-height:1;cursor:pointer}
+.lightbox-close:hover,.lightbox-close:focus-visible{background:rgba(255,255,255,.22);outline:2px solid #fff;outline-offset:2px}
+body.lightbox-open{overflow:hidden}
+
+/* 더 명확한 프로젝트 간 구분 */
+.project-v2{padding:120px 0}
+.project-v2 + .project-v2{margin-top:12px}
+
+@media(max-width:1050px){
+  .project-v2 h3{max-width:28ch}
+  .doc-grid,.doc-grid-3,.doc-grid-hamon{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:680px){
+  .project-v2 h3{font-size:30px;line-height:1.18;max-width:none}
+  .project-title-sub{font-size:.62em;line-height:1.45}
+  .doc-grid,.doc-grid-3,.doc-grid-hamon{grid-template-columns:1fr;gap:28px}
+  .doc-grid-3 .doc-shot-featured,.doc-shot-wide{grid-column:auto}
+  .doc-shot img,.doc-shot-wide img{aspect-ratio:4/3;padding:8px}
+  .image-lightbox{padding:20px}
+  .image-lightbox img{max-height:78vh}
+  .lightbox-close{top:10px;right:10px}
+  .proposal-format{font-size:.43em}
+}
+
+
+/* 히어로 문구는 의미 단위로만 줄바꿈 */
+.hero h1.hero-lead{font-size:clamp(42px,4vw,60px);line-height:1.1;max-width:11em;letter-spacing:-.045em}
+.hero-emphasis-break{display:block}
+@media(max-width:680px){.hero h1.hero-lead{font-size:36px;line-height:1.12;max-width:none}}

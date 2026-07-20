@@ -7,8 +7,8 @@ const projectButtons = [...document.querySelectorAll('.rail-item')];
 
 const projectData = {
   hamon: { index: 0, color: 0xbda6e8, target: '#hamon' },
-  resummer: { index: 1, color: 0x93cdd0, target: '#summer' },
-  danjo: { index: 2, color: 0xd6a269, target: '#danjo' }
+  danjo: { index: 1, color: 0xd6a269, target: '#danjo' },
+  resummer: { index: 2, color: 0x93cdd0, target: '#summer' }
 };
 
 const scene = new THREE.Scene();
@@ -73,7 +73,7 @@ const wingL = new THREE.Mesh(wingGeo,wingMat); wingL.rotation.set(-.15,.15,.15);
 const wingR = wingL.clone(); wingR.scale.x=-1.1; wingR.rotation.set(-.15,-.15,-.15);
 summer.add(wingL,wingR);
 const body = new THREE.Mesh(new THREE.CapsuleGeometry(.07,.7,8,16),baseMaterial(0x93cdd0,.5,0)); body.rotation.z=Math.PI/2; body.position.z=.08; summer.add(body);
-summer.position.x=0; summer.userData.key='resummer';
+summer.position.x=2.55; summer.userData.key='resummer';
 world.add(summer); objects.push(summer);
 
 // DANJO: forged blade / ember sculpture
@@ -86,7 +86,7 @@ for(let i=0;i<12;i++){
   const ember=new THREE.Mesh(new THREE.SphereGeometry(.025+Math.random()*.035,10,10),new THREE.MeshBasicMaterial({color:0xd6a269}));
   ember.position.set((Math.random()-.5)*1.8,(Math.random()-.5)*1.6,(Math.random()-.5)*.8); ember.userData.baseY=ember.position.y; ember.userData.speed=.5+Math.random(); danjo.add(ember);
 }
-danjo.position.x=2.55; danjo.rotation.z=.25; danjo.userData.key='danjo';
+danjo.position.x=0; danjo.rotation.z=.25; danjo.userData.key='danjo';
 world.add(danjo); objects.push(danjo);
 
 /* ---- 하몽 캐릭터: 실제 GLB 모델 로딩 ----
@@ -206,4 +206,58 @@ document.querySelectorAll('video').forEach(video=>video.addEventListener('error'
   }
   const revealIO = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');revealIO.unobserve(e.target);}});},{threshold:0.15});
   document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+})();
+
+
+/* ============================================================
+   문서 이미지 확대 보기 — Summer / 하몽 문서 섹션에만 적용
+   ============================================================ */
+(() => {
+  const lightbox = document.querySelector('#image-lightbox');
+  if (!lightbox) return;
+
+  const lightboxImage = lightbox.querySelector('img');
+  const lightboxCaption = lightbox.querySelector('figcaption');
+  const closeButton = lightbox.querySelector('.lightbox-close');
+  let lastFocused = null;
+
+  const openLightbox = (source) => {
+    lastFocused = document.activeElement;
+    lightboxImage.src = source.currentSrc || source.src;
+    lightboxImage.alt = source.alt || '';
+    lightboxCaption.textContent = source.dataset.zoomTitle || source.alt || '';
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+    closeButton.focus();
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+    lightboxImage.src = '';
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  };
+
+  document.querySelectorAll('.zoomable-doc').forEach((image) => {
+    image.setAttribute('role', 'button');
+    image.setAttribute('tabindex', '0');
+    image.setAttribute('aria-label', `${image.dataset.zoomTitle || image.alt || '문서 이미지'} 확대 보기`);
+    image.addEventListener('click', () => openLightbox(image));
+    image.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openLightbox(image);
+      }
+    });
+  });
+
+  closeButton.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
 })();
