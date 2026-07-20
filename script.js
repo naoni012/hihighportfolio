@@ -1,4 +1,5 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/+esm';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js/+esm';
 
 const stage = document.querySelector('#three-stage');
 const loading = stage.querySelector('.stage-loading');
@@ -44,21 +45,57 @@ const baseMaterial = (color, roughness = .28, metalness = .05) => new THREE.Mesh
   clearcoatRoughness: .35
 });
 
-// HAMON: soft asymmetric character-like sculpture
+// HAMON: load the real GLB model from assets/models
 const hamon = new THREE.Group();
-const hamonBody = new THREE.Mesh(new THREE.SphereGeometry(1.02, 64, 64), baseMaterial(0xbda6e8, .38, 0));
-hamonBody.scale.set(1.02, 1.18, .92);
-hamon.add(hamonBody);
-const eyeMat = baseMaterial(0x20202b, .08, .2);
-const eyeL = new THREE.Mesh(new THREE.SphereGeometry(.21, 32, 32), eyeMat); eyeL.position.set(-.33,.18,.89); eyeL.scale.z=.5;
-const eyeR = new THREE.Mesh(new THREE.SphereGeometry(.135, 32, 32), eyeMat); eyeR.position.set(.32,.14,.91); eyeR.scale.set(.78,1.18,.45);
-hamon.add(eyeL,eyeR);
-const antenna = new THREE.Mesh(new THREE.CapsuleGeometry(.055,.48,10,20),baseMaterial(0xbda6e8,.38,0)); antenna.rotation.z=-.52; antenna.position.set(.52,.98,0);
-const tip = new THREE.Mesh(new THREE.SphereGeometry(.12,24,24),baseMaterial(0xbda6e8,.38,0)); tip.position.set(.68,1.22,0);
-hamon.add(antenna,tip);
-hamon.position.x=-2.55;
-hamon.userData.key='hamon';
-world.add(hamon); objects.push(hamon);
+hamon.position.x = -2.55;
+hamon.userData.key = 'hamon';
+world.add(hamon);
+objects.push(hamon);
+
+const gltfLoader = new GLTFLoader();
+gltfLoader.load(
+  './assets/models/hamon_sculpt_master_WEB.glb',
+  (gltf) => {
+    const model = gltf.scene;
+
+    // Normalize any Blender export scale/origin so the character fits the hero stage.
+    const initialBox = new THREE.Box3().setFromObject(model);
+    const initialSize = initialBox.getSize(new THREE.Vector3());
+    const maxDimension = Math.max(initialSize.x, initialSize.y, initialSize.z);
+    const normalizedScale = maxDimension > 0 ? 2.45 / maxDimension : 1;
+    model.scale.setScalar(normalizedScale);
+
+    const fittedBox = new THREE.Box3().setFromObject(model);
+    const fittedCenter = fittedBox.getCenter(new THREE.Vector3());
+    model.position.sub(fittedCenter);
+    model.position.y -= 0.08;
+
+    model.traverse((node) => {
+      if (!node.isMesh) return;
+      node.castShadow = true;
+      node.receiveShadow = true;
+      if (node.material) {
+        const materials = Array.isArray(node.material) ? node.material : [node.material];
+        materials.forEach((material) => {
+          material.needsUpdate = true;
+        });
+      }
+    });
+
+    hamon.add(model);
+    loading.remove();
+  },
+  (progress) => {
+    if (progress.total > 0) {
+      const percent = Math.round((progress.loaded / progress.total) * 100);
+      loading.textContent = `3D EXPERIENCE LOADING ${percent}%`;
+    }
+  },
+  (error) => {
+    console.error('Hamon GLB failed to load:', error);
+    loading.textContent = '3D MODEL LOAD FAILED';
+  }
+);
 
 // RE,SUMMER: folded-paper butterfly abstraction
 const summer = new THREE.Group();
@@ -140,7 +177,7 @@ function resize(){
   camera.updateProjectionMatrix();
   renderer.setSize(clientWidth,clientHeight,false);
 }
-window.addEventListener('resize',resize); resize(); loading.remove();
+window.addEventListener('resize',resize); resize();
 
 const clock=new THREE.Clock();
 function animate(){
