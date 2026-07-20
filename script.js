@@ -6,7 +6,7 @@ const projectButtons = [...document.querySelectorAll('.rail-item')];
 
 const projectData = {
   hamon: { index: 0, color: 0xbda6e8, target: '#hamon' },
-  resummer: { index: 1, color: 0x93cdd0, target: '#resummer' },
+  resummer: { index: 1, color: 0x93cdd0, target: '#summer' },
   danjo: { index: 2, color: 0xd6a269, target: '#danjo' }
 };
 
@@ -165,3 +165,20 @@ setActive('hamon'); animate();
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 document.querySelectorAll('video').forEach(video=>video.addEventListener('error',()=>video.style.opacity='0'));
+
+/* ============================================================
+   ADDED — F1 도트 네비게이션 + F2 스크롤 리빌
+   기존 3D / project-rail 로직과 독립적으로 동작 (IIFE 스코프)
+   ============================================================ */
+(() => {
+  const navDots = document.querySelectorAll('.nav-dot');
+  const secList = [...navDots].map(d => document.querySelector(d.getAttribute('href'))).filter(Boolean);
+  if (secList.length) {
+    const navIO = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+      const id='#'+e.target.id; navDots.forEach(d=>d.classList.toggle('active', d.getAttribute('href')===id));
+    }});},{threshold:0.5});
+    secList.forEach(s => navIO.observe(s));
+  }
+  const revealIO = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');revealIO.unobserve(e.target);}});},{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+})();
