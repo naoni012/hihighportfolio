@@ -1,39 +1,70 @@
-HONG — VISUAL DIRECTOR PORTFOLIO (2026 리뉴얼)
+HONG — VISUAL DIRECTOR PORTFOLIO
+최종 업데이트: 4차 (실제 이미지 전량 반영 + 가독성 개선)
 
-[실행]
-1. index.html을 브라우저에서 열면 실행됩니다.
-2. 3D 인터랙션은 Three.js CDN을 사용하므로 인터넷 연결이 필요합니다.
-3. 배포: Vercel + GitHub 자동배포 / https://hihighportfolio.vercel.app/
+────────────────────────────────
+1. 폴더 구조 (이 구조 그대로 업로드)
+────────────────────────────────
+index.html
+styles.css
+script.js
+assets/models/hamon_sculpt_master_WEB.glb
+assets/images/*.jpg   (19장)
 
-[구조]
+────────────────────────────────
+2. 실행 / 배포
+────────────────────────────────
+· 로컬 확인은 반드시 로컬 서버로: 폴더에서  python3 -m http.server 8000  → http://localhost:8000
+  (index.html 더블클릭 시 file:// 에서 GLB가 CORS로 차단되어 3D 캐릭터가 안 보입니다)
+· Three.js는 CDN(jsdelivr) 사용 → 인터넷 연결 필요
+· 배포: Vercel + GitHub 자동배포 / https://hihighportfolio.vercel.app/
+
+────────────────────────────────
+3. 구조
+────────────────────────────────
 hero → #danjo(鍛造) → #summer(Summer, Again) → #hamon(하몽) → #about → #skills → #proposal → #contact
-※ 히어로의 3D 오브젝트와 하단 프로젝트 레일(data-project)은 기존 로직 그대로 유지됩니다.
-※ 섹션 id "resummer"는 "summer"로 변경되었고, script.js의 projectData.resummer.target도 '#summer'로 함께 수정했습니다.
-   레일 버튼의 data-project 값(hamon / resummer / danjo)은 3D 연동 키이므로 변경하지 않았습니다.
+· 히어로 3D: 하몽 캐릭터는 GLB 실물 모델, 나머지 2개는 절차적 조형
+· 레일 버튼 data-project 값(hamon/resummer/danjo)은 3D 연동 키 — 변경 금지
+· 섹션 id "resummer" → "summer"로 변경, script.js의 projectData.resummer.target도 '#summer'로 동기화됨
 
-[적용된 유튜브 영상]
-- #danjo: https://www.youtube.com/embed/L3py_5rTnaA?rel=0
-- #summer: https://www.youtube.com/embed/c-QibHWwHbk?rel=0
-- #hamon: https://www.youtube.com/embed/Bpn1hvm-twk?rel=0
+────────────────────────────────
+4. 영상 (전부 rel=0, 자동재생 없음)
+────────────────────────────────
+#danjo  youtu.be/L3py_5rTnaA
+#summer youtu.be/c-QibHWwHbk
+#hamon  youtu.be/Bpn1hvm-twk   ← 러프컷으로 표기
+※ 시크릿창에서 재생 테스트 필수 (Unlisted 여부 확인)
 
-[채워야 할 플레이스홀더]
-- [비교 스틸 언리얼 vs AI] / [비주얼 개발 …] / [현장 스틸 이미지] / [문서 이미지 1~4] / [초기 스케치·시안 발전·수정안·최종 캐릭터 시트]
-  → .img-placeholder div를 <img src="assets/images/파일명.jpg" alt="설명"> 으로 교체
-- [EMAIL] / [NOTION_URL] / [SHOWREEL_URL] → #contact의 dd 내용 교체
+────────────────────────────────
+5. 이미지 출처 및 마스킹 내역
+────────────────────────────────
+[鍛造]
+ danjo-unreal.jpg / danjo-ai.jpg  ← 업로드 스틸 2종, A/B 라벨만 부여(어느 쪽이 AI인지 미표기)
 
-[유튜브 임베드 방법]
-placeholder-embed 블록을 아래로 교체 (Unlisted 전제, 자동재생 없음):
-<div class="video-embed">
-  <iframe src="https://www.youtube.com/embed/영상ID?rel=0" title="제목"
-    allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
-</div>
+[Summer, Again]
+ summer-runtime.jpg  ← 샷리스트 PDF p3 (러닝타임 설계표)
+ summer-cutlist.jpg  ← 샷리스트 PDF p5 (컷 리스트)
+ summer-ratio.jpg    ← 샷리스트 PDF p21 (화면비율 전환표)
 
-[체크]
-- 시크릿창에서 Unlisted 영상 재생 확인
-- 콘솔 에러 0 확인 (3D / 도트 네비 / 리빌)
+[하몽]
+ hamon-set-vp.jpg / hamon-set-led.jpg  ← 현장 사진 2종
+ hamon-comp.jpg                        ← 합성 적용 화면
+ char-1-sketch → char-2-dev → char-3-sheet → char-4-final  ← 캐릭터 디벨롭 4단계
+ doc-staff-timeline / doc-vp-timeline / doc-callsheet / doc-chromakey-rules
+ doc-storyboard-1 / doc-storyboard-2   ← 콘티 Ver2.3 PDF p1, p3
+ doc-props.jpg                         ← 소품 조달 트래커 p1
 
-[하몽 GLB 적용 버전]
-- 실제 모델 경로: assets/models/hamon_sculpt_master_WEB.glb
-- script.js에서 GLTFLoader로 모델을 불러옵니다.
-- 모델은 로드 후 중심점과 크기를 자동 보정합니다.
-- GitHub에는 ZIP 자체가 아니라 압축을 푼 전체 구조를 그대로 업로드하세요.
+ 마스킹 처리:
+  · doc-callsheet.jpg — 배우 프로필 링크(plfil.com) 1건 검게 처리
+  · doc-props.jpg     — 팀원 실명 3건 검게 처리
+  · 그 외 문서는 개인정보 없음
+
+ ⚠ 사이트에 넣지 않은 자료:
+  · 하몽_배우섭외현황 PDF — 실명 12명 + 휴대폰번호 2건 + 개인 프로필/인스타 링크 다수.
+    마스킹해도 "누가 거절했는지"가 남아 제3자에게 불리하므로 공개 포트폴리오에서 제외했습니다.
+  · 하몽_배우용/배우미팅 참고자료 — 배우 개인 대상 문서라 제외.
+
+────────────────────────────────
+6. 이미지 교체 방법
+────────────────────────────────
+더 좋은 소스가 생기면 같은 파일명으로 assets/images/에 덮어쓰면 됩니다(HTML 수정 불필요).
+권장 규격: 문서·캐릭터 4:3, 스틸 16:9, 가로 1100~1400px, JPG 85~90%.

@@ -106,7 +106,9 @@ img,video{display:block;width:100%;height:100%;object-fit:cover}
 .shot figcaption{margin-top:12px;font-size:11px;color:#999;letter-spacing:.04em}
 .img-placeholder{display:flex;align-items:center;justify-content:center;text-align:center;min-height:200px;padding:20px;background:var(--soft);border:1px dashed #dcdcd8;border-radius:6px;color:#a5a5a0;font-size:11px;letter-spacing:.06em;line-height:1.5}
 .doc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.doc-grid .doc{min-height:170px}
+.doc-shot{margin:0}
+.doc-shot img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid var(--line);background:var(--soft)}
+.doc-shot figcaption{margin-top:8px;font-size:10px;color:#999;letter-spacing:.04em}
 .doc-list{margin:22px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
 .doc-list li{border:1px solid var(--line);border-radius:100px;padding:8px 13px;font-size:11px;color:#666}
 
@@ -165,4 +167,101 @@ img,video{display:block;width:100%;height:100%;object-fit:cover}
   .skills-section h2,.proposal h2{font-size:32px}
   .dev-row{grid-template-columns:1fr;gap:14px}
   .dev-arrow{transform:rotate(90deg)}
+}
+
+/* ---- ADDED (2차) — 영상 캡션 / 연락처 ---- */
+.video-caption{margin:-22px 0 0;font-size:11px;color:#999;letter-spacing:.06em}
+.contact-mail{display:inline-block;font-size:clamp(22px,3vw,42px);letter-spacing:-.02em;border-bottom:1px solid #111;padding-bottom:6px}
+.contact-mail:hover{color:var(--accent);border-color:var(--accent)}
+
+/* =========================================================
+   ADDED (3차) — 실제 이미지 배치 + 가독성 개선
+   이 블록은 파일 맨 아래에 있으므로 위 규칙을 의도적으로 덮어씁니다.
+   ========================================================= */
+
+/* ---- 단조 비교 스틸 2분할 ---- */
+.compare-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.compare-item{position:relative}
+.compare-item img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;background:#111}
+.compare-tag{position:absolute;left:12px;top:12px;padding:4px 10px;border-radius:100px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;letter-spacing:.14em}
+
+/* ---- 하몽 현장 스틸 ---- */
+.set-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;align-items:stretch}
+.set-grid img{width:100%;height:100%;aspect-ratio:auto;object-fit:cover;border-radius:6px;background:var(--soft);min-height:260px}
+.wide-shot{width:100%;border-radius:6px;object-fit:cover}
+
+/* ---- 문서 그리드: 4열 → 3열로 완화(가독성) ---- */
+.doc-grid{grid-template-columns:repeat(3,1fr);gap:16px}
+.doc-grid-3{grid-template-columns:repeat(3,1fr)}
+.doc-shot img{aspect-ratio:4/3;object-fit:cover;object-position:top center}
+.doc-shot figcaption{font-size:12px;color:#5f5f5f;letter-spacing:0;margin-top:10px;line-height:1.45}
+
+/* ---- 캐릭터 디벨롭 ---- */
+.dev-step img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fbfbf9;border:1px solid var(--line);border-radius:6px}
+.dev-label{font-size:10px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+.dev-note{margin:0;font-size:12px;line-height:1.5;color:#5f5f5f}
+.dev-row{align-items:start}
+.dev-arrow{padding-top:80px}
+
+/* =========================================================
+   가독성(Readability) 오버라이드
+   ========================================================= */
+body{font-size:16.5px;line-height:1.72;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+
+/* 본문 텍스트 폭 제한 — 한 줄이 너무 길어지지 않도록 */
+.project-summary,.project-description,.block-lead,.status-note,
+.about-body>p,.proposal-body,.honest-note,.learning{max-width:62ch}
+
+/* 본문 크기·대비 상향 (기존 #777/#999 → 더 진하게) */
+.project-description{font-size:15.5px;line-height:1.75;color:#4f4f4f}
+.project-summary{color:#2a2a2a;line-height:1.6}
+.status-note{font-size:14.5px;line-height:1.75;color:#4a4a4a}
+.about-body>p{font-size:17.5px;line-height:1.78;color:#4a4a4a}
+.proposal-body{color:#4a4a4a}
+.honest-note{font-size:15px;line-height:1.85;color:#454545}
+.system-list strong{font-size:15px}
+.system-list span{font-size:14px;color:#565656;line-height:1.6}
+.process p{font-size:15px;line-height:1.65;color:#3c3c3c}
+.process-label{font-size:11px}
+.doc-list li{font-size:12.5px;color:#555}
+.skill-card strong{font-size:14.5px;margin-bottom:18px}
+.skill-card li{font-size:13.5px;line-height:1.6;color:#535353}
+.cap-card strong{font-size:15px}
+.cap-card p{font-size:13.5px;line-height:1.6;color:#5c5c5c}
+.shot figcaption{font-size:12.5px;color:#5f5f5f;letter-spacing:0;line-height:1.5;margin-top:14px}
+
+/* 메타 표 — 라벨/값 모두 키움 */
+.meta-wide div{grid-template-columns:120px 1fr;padding:14px 0}
+.meta-wide dt{font-size:10.5px;color:#707070}
+.meta-wide dd{font-size:13.5px;line-height:1.6;color:#333}
+
+/* 섹션 라벨 대비 */
+.eyebrow{color:#6a6a6a}
+.block-title{color:#767676;font-size:11.5px}
+
+/* 여백 — 블록 사이 숨 쉬는 공간 확대 */
+.block{margin-top:60px}
+.block-main,.block-sub{padding-top:52px}
+.project-v2{padding:110px 0}
+.shot{margin-top:40px}
+
+/* 히어로 서브카피 대비 살짝 상향(너무 흐려 안 읽히는 문제) */
+.hero-copy p.hero-sub{color:#4f4f4f;opacity:1}
+.hero-copy p.hero-hook{color:#7a7a7a;opacity:1;max-width:44ch}
+
+@media(max-width:1050px){
+  .doc-grid,.doc-grid-3{grid-template-columns:repeat(2,1fr)}
+  .set-grid{grid-template-columns:1fr}
+  .set-grid img{min-height:0;aspect-ratio:16/10}
+  .dev-row{grid-template-columns:1fr 1fr;gap:20px}
+  .dev-arrow{display:none}
+}
+@media(max-width:680px){
+  body{font-size:16px}
+  .compare-pair{grid-template-columns:1fr}
+  .doc-grid,.doc-grid-3{grid-template-columns:1fr}
+  .dev-row{grid-template-columns:1fr}
+  .project-v2{padding:70px 0}
+  .block{margin-top:44px}
+  .meta-wide div{grid-template-columns:1fr;gap:4px;padding:12px 0}
 }

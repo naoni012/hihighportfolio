@@ -12,6 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -71,10 +79,11 @@
             <p class="badge badge-done">1'40"</p>
           </header>
 
+          <!-- 영상 매핑 확인 필요: youtu.be/L3py_5rTnaA → 鍛造(단조) -->
           <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/L3py_5rTnaA?rel=0" title="鍛造 (단조) 뮤직비디오"
-              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/L3py_5rTnaA?rel=0" title="鍛造 (단조) — AI · 언리얼 하이브리드 뮤직비디오"
+              loading="lazy"
+              allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
           </div>
 
           <dl class="meta meta-wide">
@@ -100,7 +109,16 @@
           <blockquote class="learning">하이브리드 파이프라인에는 플랜 B가 설계 단계부터 있어야 한다는 것, 그리고 디렉터의 일은 툴이 아니라 판단이라는 것을 배웠습니다.</blockquote>
 
           <figure class="shot">
-            <div class="img-placeholder">[비교 스틸 언리얼 vs AI]</div>
+            <div class="compare-pair">
+              <div class="compare-item">
+                <img src="assets/images/danjo-unreal.jpg" alt="鍛造 뮤직비디오 스틸 A — 밤 산등성이에 앉은 인물" loading="lazy">
+                <span class="compare-tag">A</span>
+              </div>
+              <div class="compare-item">
+                <img src="assets/images/danjo-ai.jpg" alt="鍛造 뮤직비디오 스틸 B — 같은 구도, 같은 톤" loading="lazy">
+                <span class="compare-tag">B</span>
+              </div>
+            </div>
             <figcaption>어느 쪽이 AI인지 구분되지 않도록 맞춘 톤</figcaption>
           </figure>
         </div>
@@ -135,14 +153,30 @@
           </div>
 
           <figure class="shot">
-            <div class="img-placeholder">[비주얼 개발 — 2색 보드 / 화면비 다이어그램 / 캐릭터 시트 / 바이블 발췌]</div>
+            <div class="doc-grid doc-grid-3">
+              <figure class="doc-shot">
+                <img src="assets/images/summer-runtime.jpg" alt="8씬 34컷 러닝타임 설계표" loading="lazy">
+                <figcaption>8씬 34컷 러닝타임 설계</figcaption>
+              </figure>
+              <figure class="doc-shot">
+                <img src="assets/images/summer-cutlist.jpg" alt="컷별 비율·샷 크기·앵글·카메라 무빙 리스트" loading="lazy">
+                <figcaption>컷 리스트 — 비율·샷·앵글·무빙</figcaption>
+              </figure>
+              <figure class="doc-shot">
+                <img src="assets/images/summer-ratio.jpg" alt="화면비율 전환 설계표" loading="lazy">
+                <figcaption>화면비율 전환 설계 (전체 2회)</figcaption>
+              </figure>
+            </div>
+            <figcaption>프로덕션 바이블 발췌 — 컷을 찍기 전에 규칙부터 확정했습니다</figcaption>
           </figure>
 
+          <!-- 영상 매핑 확인 필요: youtu.be/c-QibHWwHbk → Summer, Again -->
           <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/c-QibHWwHbk?rel=0" title="Summer, Again 프롤로그 필름"
-              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/c-QibHWwHbk?rel=0" title="Summer, Again — K-팝 세계관 프롤로그 필름"
+              loading="lazy"
+              allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
           </div>
+          <p class="video-caption">1분 프롤로그</p>
 
           <p class="status-note">34컷 전체 설계를 완료하고 프롤로그 분량을 우선 제작한 진행형 작업입니다. 구현 과정에서 확인한 AI 캐릭터 일관성의 한계와 개선 방향은 면접에서 말씀드릴 수 있습니다.</p>
         </div>
@@ -158,22 +192,28 @@
             <p class="badge badge-wip">러프컷 완료 · 2026.08 쇼케이스 예정</p>
           </header>
 
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/Bpn1hvm-twk?rel=0" title="하몽 (夏夢) 프로젝트 영상"
-              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-
           <dl class="meta meta-wide">
             <div><dt>역할</dt><dd>프로덕션 코디네이터 · 제작 문서 체계 총괄 · 캐릭터 디자인</dd></div>
             <div><dt>기간</dt><dd>2026.06 –</dd></div>
             <div><dt>촬영</dt><dd>크로마키 1일 + VP(LED 월) 1일 · 외계인 캐릭터 100% AI 합성</dd></div>
           </dl>
 
+          <!-- 영상 매핑 확인 필요: youtu.be/Bpn1hvm-twk → 하몽(夏夢) -->
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/Bpn1hvm-twk?rel=0" title="하몽 (夏夢) — 판타지 단편 러프컷"
+              loading="lazy"
+              allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="video-caption">러프컷 · 2026.08 쇼케이스 버전 작업 중</p>
+
           <div class="block">
             <h4 class="block-title">01 현장</h4>
             <figure class="shot">
-              <div class="img-placeholder">[현장 스틸 이미지]</div>
+              <div class="set-grid">
+                <img src="assets/images/hamon-set-vp.jpg" alt="LED 월 앞에서 모니터를 보며 현장을 진행하는 모습" loading="lazy">
+                <img src="assets/images/hamon-set-led.jpg" alt="LED 월에 띄운 노을 언덕 배경 앞에서 촬영 중인 배우와 스태프" loading="lazy">
+              </div>
+              <figcaption>VP(LED 월) 촬영 현장 — 배경은 실시간 렌더, 인물은 실사</figcaption>
             </figure>
           </div>
 
@@ -181,10 +221,34 @@
             <h4 class="block-title">02 시스템</h4>
             <p class="block-lead">촬영 이틀이 사고 없이 끝나도록, 모든 부서가 같은 문서를 봤습니다.</p>
             <div class="doc-grid">
-              <div class="img-placeholder doc">[문서 이미지 1 — 민감정보 마스킹]</div>
-              <div class="img-placeholder doc">[문서 이미지 2 — 민감정보 마스킹]</div>
-              <div class="img-placeholder doc">[문서 이미지 3 — 민감정보 마스킹]</div>
-              <div class="img-placeholder doc">[문서 이미지 4 — 민감정보 마스킹]</div>
+              <figure class="doc-shot">
+                <img src="assets/images/doc-staff-timeline.jpg" alt="1일차 크로마키 촬영 스태프 타임라인 표 (개인정보 마스킹 처리됨)" loading="lazy">
+                <figcaption>스태프 타임라인 · 1일차</figcaption>
+              </figure>
+              <figure class="doc-shot">
+                <img src="assets/images/doc-vp-timeline.jpg" alt="VP 촬영 부서별(촬영·조명·메이크업) 상세 타임라인 표 (개인정보 마스킹 처리됨)" loading="lazy">
+                <figcaption>VP 촬영 부서 통합 타임라인 · 2일차</figcaption>
+              </figure>
+              <figure class="doc-shot">
+                <img src="assets/images/doc-callsheet.jpg" alt="메이크업 콜시트 촬영 개요 및 컷 리스트 (배우 프로필 링크 등 개인정보 마스킹 처리됨)" loading="lazy">
+                <figcaption>메이크업 콜시트 · 컷 리스트</figcaption>
+              </figure>
+              <figure class="doc-shot">
+                <img src="assets/images/doc-chromakey-rules.jpg" alt="크로마키 메이크업 특별 주의사항 및 색상 규정" loading="lazy">
+                <figcaption>크로마키 컬러 규정</figcaption>
+              </figure>
+              <figure class="doc-shot">
+                <img src="assets/images/doc-storyboard-1.jpg" alt="41컷 스토리보드 Ver 2.3 — 씬1 컷별 콘티" loading="lazy">
+                <figcaption>41컷 스토리보드 Ver 2.3</figcaption>
+              </figure>
+              <figure class="doc-shot">
+                <img src="assets/images/doc-storyboard-2.jpg" alt="스토리보드 — 컷별 카메라·오디오·비고가 정리된 시트" loading="lazy">
+                <figcaption>컷별 카메라 · 오디오 · VP/CH 지정</figcaption>
+              </figure>
+              <figure class="doc-shot">
+                <img src="assets/images/doc-props.jpg" alt="소품 조달 마스터 트래커 — 사용 씬, 조달 방법, 단가, 리스크 등급 (개인 이름 마스킹)" loading="lazy">
+                <figcaption>소품 조달 마스터 트래커</figcaption>
+              </figure>
             </div>
             <ul class="doc-list">
               <li>41컷 스토리보드 (Ver 2.3)</li>
@@ -192,6 +256,7 @@
               <li>배우 · 스태프 타임라인</li>
               <li>AI 합성용 클린 플레이트 체크리스트</li>
               <li>전 부서 크로마키 색상 규정</li>
+              <li>소품 조달 마스터 트래커</li>
             </ul>
           </div>
 
@@ -201,28 +266,36 @@
             <figure class="shot">
               <div class="dev-row" role="list" aria-label="캐릭터 디벨롭 과정">
                 <div class="dev-step" role="listitem">
-                  <span class="dev-label">초안</span>
-                  <div class="img-placeholder">[초기 스케치]</div>
+                  <span class="dev-label">01 초안</span>
+                  <img src="assets/images/char-1-sketch.jpg" alt="손그림 초기 스케치 — 안테나와 비대칭 눈의 외계인 두 방향 시안" loading="lazy">
+                  <p class="dev-note">비대칭 눈 · 안테나 · 둥근 실루엣을 손그림으로 탐색</p>
                 </div>
                 <div class="dev-arrow" aria-hidden="true">→</div>
                 <div class="dev-step" role="listitem">
-                  <span class="dev-label">발전</span>
-                  <div class="img-placeholder">[시안 발전]</div>
+                  <span class="dev-label">02 발전</span>
+                  <img src="assets/images/char-2-dev.jpg" alt="입체 시안 — 무광 세라믹 질감의 흰색 캐릭터 뷰 전개" loading="lazy">
+                  <p class="dev-note">입체로 옮기며 뿔·다리 비율과 별 꼬리를 확정</p>
                 </div>
                 <div class="dev-arrow" aria-hidden="true">→</div>
                 <div class="dev-step" role="listitem">
-                  <span class="dev-label">수정</span>
-                  <div class="img-placeholder">[수정안]</div>
+                  <span class="dev-label">03 규격화</span>
+                  <img src="assets/images/char-3-sheet.jpg" alt="캐릭터 시트 — 턴어라운드, 포즈, 표정, 재질·컬러 코드 정리" loading="lazy">
+                  <p class="dev-note">턴어라운드 · 표정 · 재질 · 컬러 코드까지 시트로 고정</p>
                 </div>
                 <div class="dev-arrow" aria-hidden="true">→</div>
                 <div class="dev-step" role="listitem">
-                  <span class="dev-label">최종</span>
-                  <div class="img-placeholder">[최종 캐릭터 시트]</div>
+                  <span class="dev-label">04 최종</span>
+                  <img src="assets/images/char-4-final.jpg" alt="최종 캐릭터 시트 — 라벤더 벨벳 질감으로 확정된 하몽" loading="lazy">
+                  <p class="dev-note">작품 미감(따뜻한 SF)에 맞춰 재질·색을 최종 결정</p>
                 </div>
               </div>
               <figcaption>레퍼런스가 아니라, 제가 정의한 캐릭터입니다.</figcaption>
             </figure>
             <p class="project-description">이 캐릭터를 AI 합성이 가능한 형태로 규격화하고, 캐릭터 디자인 → 클린 플레이트 → AI 합성의 흐름으로 영상에 구현했습니다.</p>
+            <figure class="shot">
+              <img src="assets/images/hamon-comp.jpg" alt="세트 배경 위에 소품과 요소를 합성한 실제 화면" loading="lazy" class="wide-shot">
+              <figcaption>합성 적용 화면 — 배경·소품·캐릭터를 한 톤으로 맞춘 결과</figcaption>
+            </figure>
           </div>
 
           <p class="status-note">현재 러프컷 편집 완료, 2026년 8월 완성 및 오프라인 쇼케이스 예정. 세계관을 영상에서 오프라인 경험으로 확장하는 과정을 진행 중입니다.</p>
@@ -278,11 +351,7 @@
     <section id="contact" class="contact section-pad reveal">
       <p class="eyebrow">CONTACT</p>
       <h2>Let’s create the next experience.</h2>
-      <dl class="contact-list">
-        <div><dt>Email</dt><dd>[EMAIL]</dd></div>
-        <div><dt>Portfolio</dt><dd>[NOTION_URL]</dd></div>
-        <div><dt>Showreel</dt><dd>[SHOWREEL_URL]</dd></div>
-      </dl>
+      <a class="contact-mail" href="mailto:enditor012@gmail.com">enditor012@gmail.com</a>
     </section>
   </main>
 
