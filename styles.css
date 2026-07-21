@@ -113,7 +113,7 @@ img,video{display:block;width:100%;height:100%;object-fit:cover}
 .doc-list li{border:1px solid var(--line);border-radius:100px;padding:8px 13px;font-size:11px;color:#666}
 
 /* 캐릭터 디벨롭 가로 배열 */
-.dev-row{display:grid;grid-template-columns:1fr 18px 1fr 18px 1fr 18px 1fr;align-items:center;gap:10px}
+.dev-row{display:grid;grid-template-columns:1fr 22px 1fr 22px 1fr;align-items:center;gap:14px}
 .dev-step{display:grid;gap:9px}
 .dev-label{font-size:9px;letter-spacing:.16em;color:#999}
 .dev-step .img-placeholder{min-height:190px}
@@ -253,7 +253,7 @@ body{font-size:16.5px;line-height:1.72;-webkit-font-smoothing:antialiased;letter
   .doc-grid,.doc-grid-3{grid-template-columns:repeat(2,1fr)}
   .set-grid{grid-template-columns:1fr}
   .set-grid img{min-height:0;aspect-ratio:16/10}
-  .dev-row{grid-template-columns:1fr 1fr;gap:20px}
+  .dev-row{grid-template-columns:1fr 1fr 1fr;gap:20px}
   .dev-arrow{display:none}
 }
 @media(max-width:680px){
@@ -266,86 +266,146 @@ body{font-size:16.5px;line-height:1.72;-webkit-font-smoothing:antialiased;letter
   .meta-wide div{grid-template-columns:1fr;gap:4px;padding:12px 0}
 }
 
-
 /* =========================================================
-   5차 수정 — 이름 제거 / 콘텐츠 우선순위 / 문서 가독성 / 한글 줄바꿈
+   ADDED (4차) — 기여도 태그 · 문서 더보기 토글 · 완성 비주얼 · 리뷰 반영
    ========================================================= */
 
-/* 한글이 글자 단위로 잘리지 않도록 하고, 제목은 의도한 덩어리로 줄바꿈 */
-html{word-break:keep-all}
-body{overflow-wrap:break-word}
-h1,h2,h3,h4,.project-summary,.project-description,.block-lead,.status-note,
-.about-body p,.proposal-body,.honest-note,.meta-wide dd,.system-list span,.process p,
-.gallery-caption,.doc-shot figcaption,.dev-note{text-wrap:pretty;word-break:keep-all}
-h1,h2,h3,.proposal-title-sub{text-wrap:balance}
+/* ---- 기여도(OWNED/COLLABORATED) ---- */
+.contribution{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+.contribution span{font-size:11.5px;letter-spacing:.02em;padding:7px 13px;border-radius:100px;border:1px solid var(--line);color:#4a4a4a;background:var(--soft)}
+.contribution strong{font-size:10px;letter-spacing:.1em;color:var(--accent);margin-right:6px}
+.contrib-collab{background:transparent}
 
-/* 잘못된 고정 높이 때문에 문서 이미지와 캡션이 겹치던 문제 수정 */
-img,video{height:auto}
+/* ---- 완성 비주얼(하몽 키비주얼) ---- */
+.key-visual{margin-top:32px}
+.key-visual img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px}
+.key-visual figcaption{margin-top:12px}
 
-/* 헤더는 일반적인 포트폴리오 라벨만 사용 */
-.brand{font-size:11px;letter-spacing:.18em}
+/* ---- 문서 더보기 토글 ---- */
+.doc-toggle{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:11px 18px;border:1px solid var(--line);border-radius:100px;background:transparent;font-size:12px;letter-spacing:.04em;color:#444;cursor:pointer;transition:.2s}
+.doc-toggle:hover{border-color:#111;color:#111}
+.doc-toggle-icon{font-size:13px;line-height:1}
+.doc-extra{margin-top:16px}
+.doc-extra[hidden]{display:none}
 
-/* 긴 프로젝트 제목을 2단 위계로 정리 */
-.project-v2 h3{max-width:24ch;font-size:clamp(32px,3.2vw,50px);line-height:1.12}
-.project-title-sub{display:inline-block;margin-top:.35em;font-size:.57em;line-height:1.4;letter-spacing:-.02em;color:#4c4c4c;font-weight:500}
-.project-head{max-width:900px}
-.project-body{max-width:1040px}
+/* 핵심 3장 캡션 — 문서명(강조) + 성과 문장 */
+.doc-grid:not(.doc-extra) .doc-shot figcaption strong{display:block;color:#1a1a1a;font-size:12.5px;margin-bottom:4px;letter-spacing:0}
 
-/* 제안 섹션의 긴 제목도 의미 단위로 분리 */
-.proposal h2{max-width:24ch;line-height:1.12}
-.proposal-title-sub{display:inline-block;margin-top:.28em;color:#222}
-.proposal-format{display:block;margin-top:14px;font-size:.36em;line-height:1.4;letter-spacing:.08em;color:#777;font-weight:600}
-
-/* Summer / 하몽 문서 섹션: 작은 3열 카드 대신 읽을 수 있는 2열 */
-.doc-gallery{margin-top:44px}
-.doc-grid,.doc-grid-3,.doc-grid-hamon{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 24px;align-items:start}
-.doc-grid-3 .doc-shot-featured{grid-column:1/-1}
-.doc-shot{margin:0;min-width:0;display:flex;flex-direction:column;gap:12px}
-.doc-shot img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;object-position:center;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fafaf8;cursor:zoom-in;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
-.doc-shot img:hover,.doc-shot img:focus-visible{transform:translateY(-2px);border-color:#bcbcbc;box-shadow:0 14px 35px rgba(0,0,0,.08);outline:none}
-.doc-shot-wide{grid-column:1/-1}
-.doc-shot-wide img{aspect-ratio:16/10}
-.doc-shot figcaption{margin:0;font-size:13px;line-height:1.55;color:#444;letter-spacing:-.01em}
-.gallery-caption{margin:22px 0 0;font-size:14px;line-height:1.65;color:#3f3f3f;font-weight:500}
-.zoom-hint{margin:8px 0 0;font-size:11px;line-height:1.5;color:#8a8a8a;letter-spacing:.01em}
-.zoom-hint-before{margin:0 0 18px}
-
-/* 하몽 현장 이미지는 기존 비율 유지 */
-.set-grid img{height:100%}
-
-/* 문서 확대 보기 */
-.image-lightbox{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:44px;background:rgba(8,8,8,.88);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s ease}
-.image-lightbox.is-open{opacity:1;visibility:visible;pointer-events:auto}
-.image-lightbox figure{margin:0;max-width:min(1400px,94vw);max-height:90vh;display:flex;flex-direction:column;gap:12px;align-items:center}
-.image-lightbox img{display:block;width:auto;max-width:100%;height:auto;max-height:82vh;object-fit:contain;border-radius:8px;background:#fff;box-shadow:0 20px 70px rgba(0,0,0,.35)}
-.image-lightbox figcaption{color:#fff;font-size:13px;line-height:1.5;text-align:center}
-.lightbox-close{position:absolute;top:18px;right:24px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:32px;line-height:1;cursor:pointer}
-.lightbox-close:hover,.lightbox-close:focus-visible{background:rgba(255,255,255,.22);outline:2px solid #fff;outline-offset:2px}
-body.lightbox-open{overflow:hidden}
-
-/* 더 명확한 프로젝트 간 구분 */
-.project-v2{padding:120px 0}
-.project-v2 + .project-v2{margin-top:12px}
+/* Summer 2열 문서 그리드 */
+.doc-grid-2{grid-template-columns:repeat(2,1fr);max-width:820px}
 
 @media(max-width:1050px){
-  .project-v2 h3{max-width:28ch}
-  .doc-grid,.doc-grid-3,.doc-grid-hamon{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .doc-grid-2{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:680px){
+  .contribution{gap:8px}
+  .doc-grid-2{grid-template-columns:1fr}
+}
+
+/* =========================================================
+   ADDED (5차) — Summer, Again 시각 개발 시트 + 안정성/가독성 보강
+   ========================================================= */
+
+/* 외부 3D 모듈이 늦거나 실패해도 본문은 반드시 보이게 유지 */
+.reveal{opacity:1;transform:none}
+.has-js .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.has-js .reveal.show,.has-js .reveal.visible{opacity:1;transform:none}
+
+/* 한글 줄바꿈과 이미지 기본 비율 안정화 */
+body{word-break:keep-all;overflow-wrap:break-word}
+img{display:block;width:100%;height:auto}
+video{display:block;width:100%;height:100%;object-fit:cover}
+h1,h2,h3,h4,p,dd,figcaption,li{word-break:keep-all}
+
+/* 고정 헤더가 이미지 위에서도 읽히도록 반투명 바 적용 */
+.site-header{
+  padding:18px clamp(20px,4vw,64px);
+  mix-blend-mode:normal;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(17,17,17,.06)
+}
+.brand{font-size:12px}
+
+/* 프로젝트 제목을 이름/설명 두 줄로 분리 */
+.project-body{width:100%;max-width:1100px}
+.project-v2 h3{display:grid;gap:9px;max-width:none;margin-bottom:16px}
+.project-name{font-size:clamp(38px,4.3vw,64px);line-height:.98;letter-spacing:-.055em;font-weight:500}
+.project-type{font-size:clamp(15px,1.35vw,19px);line-height:1.5;letter-spacing:-.02em;font-weight:500;color:#4f4f4f;max-width:46ch}
+.project-danjo .project-name{color:#a76b37}
+.project-hamon .project-name{color:#9277c9}
+.project-resummer .project-name{color:#559ca1}
+.project-danjo .project-type,.project-hamon .project-type,.project-resummer .project-type{color:#4f4f4f}
+
+/* Summer 키비주얼 */
+.summer-key-visual{margin-top:48px}
+.summer-key-visual img{aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:var(--soft)}
+.visual-label{display:inline-block;margin-right:10px;color:#559ca1;font-size:10px;letter-spacing:.16em;font-weight:700}
+
+/* 내러티브 키프레임 */
+.story-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.story-card{margin:0;min-width:0}
+.story-card img{aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:var(--soft)}
+.story-card figcaption{display:grid;gap:4px;margin-top:12px}
+.story-card figcaption strong{font-size:11px;letter-spacing:.14em;color:#559ca1}
+.story-card figcaption span{font-size:13px;line-height:1.55;color:#4e4e4e}
+
+/* 캐릭터/공간 시트 */
+.sheet-stack{display:grid;gap:24px}
+.sheet-card{margin:0;min-width:0}
+.sheet-card img{width:100%;height:auto;object-fit:contain;border:1px solid var(--line);border-radius:10px;background:#f4efeb}
+.sheet-card figcaption{display:grid;grid-template-columns:minmax(180px,.36fr) minmax(0,1fr);gap:18px;margin-top:12px;padding-bottom:2px}
+.sheet-card figcaption strong{font-size:11px;letter-spacing:.12em;color:#222}
+.sheet-card figcaption span{font-size:13px;line-height:1.55;color:#5a5a5a}
+.sheet-card-secondary{margin-top:2px}
+.space-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.space-card img{aspect-ratio:16/9;object-fit:cover}
+.space-card figcaption{grid-template-columns:1fr;gap:4px}
+.space-card figcaption strong{color:#559ca1}
+
+/* 스토리 오브젝트 + 비주얼 규칙 */
+.object-layout{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);gap:28px;align-items:start}
+.object-visual{margin:0}
+.object-visual img{aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:var(--soft)}
+.object-visual figcaption{font-size:13px;line-height:1.6;color:#555;margin-top:12px}
+.object-visual figcaption strong{color:#222}
+.object-layout .system-list{align-self:stretch}
+.object-layout .system-list li{padding:20px 22px}
+
+/* 확대 가능한 시트 */
+[data-zoom]{cursor:zoom-in}
+.image-lightbox{
+  position:fixed;inset:0;z-index:2000;
+  display:grid;place-items:center;
+  padding:64px 24px 28px;
+  background:rgba(10,10,10,.92);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .22s ease,visibility .22s ease
+}
+.image-lightbox.is-open{opacity:1;visibility:visible;pointer-events:auto}
+.image-lightbox figure{margin:0;display:grid;gap:12px;max-width:min(94vw,1500px);max-height:88vh}
+.image-lightbox img{display:block;width:auto;max-width:94vw;max-height:80vh;object-fit:contain;margin:auto;border-radius:4px;background:#fff}
+.image-lightbox figcaption{max-width:900px;margin:0 auto;color:#ddd;text-align:center;font-size:13px;line-height:1.55}
+.lightbox-close{position:absolute;right:24px;top:20px;border:0;background:transparent;color:#fff;font-size:12px;letter-spacing:.12em;cursor:pointer;padding:8px}
+.lightbox-close:focus-visible{outline:2px solid #fff;outline-offset:3px}
+body.lightbox-open{overflow:hidden}
+
+@media(max-width:1050px){
+  .object-layout{grid-template-columns:1fr}
+  .object-visual{max-width:580px}
 }
 
 @media(max-width:680px){
-  .project-v2 h3{font-size:30px;line-height:1.18;max-width:none}
-  .project-title-sub{font-size:.62em;line-height:1.45}
-  .doc-grid,.doc-grid-3,.doc-grid-hamon{grid-template-columns:1fr;gap:28px}
-  .doc-grid-3 .doc-shot-featured,.doc-shot-wide{grid-column:auto}
-  .doc-shot img,.doc-shot-wide img{aspect-ratio:4/3;padding:8px}
-  .image-lightbox{padding:20px}
-  .image-lightbox img{max-height:78vh}
-  .lightbox-close{top:10px;right:10px}
-  .proposal-format{font-size:.43em}
+  .site-header{padding:15px 17px}
+  .brand{font-size:10px}
+  .nav{gap:11px;font-size:8px}
+  .project-name{font-size:38px}
+  .project-type{font-size:14px}
+  .story-grid,.space-grid{grid-template-columns:1fr}
+  .sheet-card figcaption{grid-template-columns:1fr;gap:5px}
+  .object-layout{gap:20px}
+  .summer-key-visual{margin-top:38px}
+  .image-lightbox{padding:58px 12px 20px}
+  .lightbox-close{right:10px;top:10px}
 }
-
-
-/* 히어로 문구는 의미 단위로만 줄바꿈 */
-.hero h1.hero-lead{font-size:clamp(42px,4vw,60px);line-height:1.1;max-width:11em;letter-spacing:-.045em}
-.hero-emphasis-break{display:block}
-@media(max-width:680px){.hero h1.hero-lead{font-size:36px;line-height:1.12;max-width:none}}

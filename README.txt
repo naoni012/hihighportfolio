@@ -1,78 +1,70 @@
 VISUAL DIRECTOR PORTFOLIO
-최종 업데이트: 5차 (프로젝트 순서·문서 가독성·한글 줄바꿈 개선)
+업데이트: Summer, Again 캐릭터·공간·키비주얼 시트 추가 / 2026-07-21
 
 ────────────────────────────────
-1. 폴더 구조 (이 구조 그대로 업로드)
+1. GitHub에 올릴 구조
 ────────────────────────────────
 index.html
 styles.css
 script.js
-assets/models/hamon_sculpt_master_WEB.glb
-assets/images/*.jpg   (19장)
+ui.js
+README.txt
+assets/
+  images/
+  models/hamon_sculpt_master_WEB.glb
+
+ZIP 자체가 아니라 압축을 푼 위 파일과 폴더를 기존 GitHub 저장소 최상단에 올립니다.
+기존 저장소: naoni012/hihighportfolio
+Vercel 주소: https://hihighportfolio.vercel.app/
 
 ────────────────────────────────
-2. 실행 / 배포
+2. 이번 업데이트
 ────────────────────────────────
-· 로컬 확인은 반드시 로컬 서버로: 폴더에서  python3 -m http.server 8000  → http://localhost:8000
-  (index.html 더블클릭 시 file:// 에서 GLB가 CORS로 차단되어 3D 캐릭터가 안 보입니다)
-· Three.js는 CDN(jsdelivr) 사용 → 인터넷 연결 필요
-· 배포: Vercel + GitHub 자동배포 / https://hihighportfolio.vercel.app/
-
-────────────────────────────────
-3. 구조
-────────────────────────────────
-hero → #hamon(하몽) → #danjo(鍛造) → #summer(Summer, Again) → #about → #skills → #proposal → #contact
-· 히어로 3D: 하몽 캐릭터는 GLB 실물 모델, 나머지 2개는 절차적 조형
-· 레일 버튼 data-project 값(hamon/resummer/danjo)은 3D 연동 키 — 변경 금지
-· 섹션 id "resummer" → "summer"로 변경, script.js의 projectData.resummer.target도 '#summer'로 동기화됨
-
-────────────────────────────────
-4. 영상 (전부 rel=0, 자동재생 없음)
-────────────────────────────────
-#danjo  youtu.be/L3py_5rTnaA
-#summer youtu.be/c-QibHWwHbk
-#hamon  youtu.be/Bpn1hvm-twk   ← 러프컷으로 표기
-※ 시크릿창에서 재생 테스트 필수 (Unlisted 여부 확인)
-
-────────────────────────────────
-5. 이미지 출처 및 마스킹 내역
-────────────────────────────────
-[鍛造]
- danjo-unreal.jpg / danjo-ai.jpg  ← 업로드 스틸 2종, A/B 라벨만 부여(어느 쪽이 AI인지 미표기)
+[전체]
+· 긴 프로젝트 제목을 프로젝트명 / 설명 두 줄로 분리해 줄바꿈을 정리했습니다.
+· 한글 단어가 글자 단위로 잘리지 않도록 줄바꿈 규칙을 보강했습니다.
+· 고정 헤더에 반투명 흰 배경을 적용해 이미지 위에서도 메뉴가 읽히게 했습니다.
+· Three.js CDN 로딩이 실패해도 본문·문서 토글·이미지 확대가 작동하도록 ui.js를 분리했습니다.
+· 문서·캐릭터·공간 이미지는 클릭하면 확대해서 볼 수 있습니다.
+· 이전에 삭제 요청한 하몽 합성 테스트 이미지(hamon-comp.jpg)는 HTML과 assets에서 제거했습니다.
+· 하몽 제작 문서 하단의 중복 태그 목록을 제거했습니다.
 
 [Summer, Again]
- summer-runtime.jpg  ← 샷리스트 PDF p3 (러닝타임 설계표)
- summer-cutlist.jpg  ← 샷리스트 PDF p5 (컷 리스트)
- summer-ratio.jpg    ← 샷리스트 PDF p21 (화면비율 전환표)
-
-[하몽]
- hamon-set-vp.jpg / hamon-set-led.jpg  ← 현장 사진 2종
- char-1-sketch → char-2-dev → char-3-sheet → char-4-final  ← 캐릭터 디벨롭 4단계
- doc-staff-timeline / doc-vp-timeline / doc-callsheet / doc-chromakey-rules
- doc-storyboard-1 / doc-storyboard-2   ← 콘티 Ver2.3 PDF p1, p3
- doc-props.jpg                         ← 소품 조달 트래커 p1
-
- 마스킹 처리:
-  · doc-callsheet.jpg — 배우 프로필 링크(plfil.com) 1건 검게 처리
-  · doc-props.jpg     — 팀원 실명 3건 검게 처리
-  · 그 외 문서는 개인정보 없음
-
- ⚠ 사이트에 넣지 않은 자료:
-  · 하몽_배우섭외현황 PDF — 실명 12명 + 휴대폰번호 2건 + 개인 프로필/인스타 링크 다수.
-    마스킹해도 "누가 거절했는지"가 남아 제3자에게 불리하므로 공개 포트폴리오에서 제외했습니다.
-  · 하몽_배우용/배우미팅 참고자료 — 배우 개인 대상 문서라 제외.
+· 영상이 프로젝트 상단에서 먼저 보이도록 이동했습니다.
+· KEY VISUAL: summer-key-visual.jpg
+· NARRATIVE KEYFRAMES: summer-keyframe-butterfly.jpg / summer-keyframe-light.jpg
+· CHARACTER SYSTEM: summer-character-sheet.jpg / summer-face-sheet.jpg
+· SPACE SYSTEM: summer-space-room.jpg / summer-space-hall.jpg
+· STORY OBJECT: summer-story-object.jpg
+· 기존 러닝타임·화면비 문서는 마지막 PRODUCTION BIBLE 섹션으로 이동했습니다.
 
 ────────────────────────────────
-6. 이미지 교체 방법
+3. 영상 매핑
 ────────────────────────────────
-더 좋은 소스가 생기면 같은 파일명으로 assets/images/에 덮어쓰면 됩니다(HTML 수정 불필요).
-권장 규격: 문서·캐릭터 4:3, 스틸 16:9, 가로 1100~1400px, JPG 85~90%.
+단조: https://youtu.be/L3py_5rTnaA
+하몽: https://youtu.be/Bpn1hvm-twk
+Summer, Again: https://youtu.be/c-QibHWwHbk
+
+배포 전 시크릿 창에서 세 영상이 올바른 프로젝트에 표시되는지 확인하세요.
 
 ────────────────────────────────
-7. 이번 수정 사항
+4. 배포 방법
 ────────────────────────────────
-· 잘못된 이름 표기 제거
-· 프로젝트 순서: 하몽 → 鍛造 → Summer, Again
-· Summer / 하몽 문서 이미지를 2열로 확대하고 클릭 확대 기능 추가
-· 문서 캡션 겹침, 한글 글자 단위 줄바꿈, 긴 프로젝트 제목 가독성 수정
-· 하몽 마지막 합성 적용 화면(hamon-comp.jpg) 사이트에서 제거
+1) 이 폴더 전체를 ZIP으로 받은 경우 먼저 압축을 풉니다.
+2) GitHub hihighportfolio 저장소에서 Add file → Upload files를 누릅니다.
+3) index.html, styles.css, script.js, ui.js, README.txt, assets 폴더를 모두 드래그합니다.
+4) Commit directly to the main branch를 선택하고 Commit changes를 누릅니다.
+5) Vercel → hihighportfolio → Deployments에서 최신 배포가 Ready인지 확인합니다.
+6) https://hihighportfolio.vercel.app/ 에서 강력 새로고침합니다.
+   Mac: Command + Shift + R / Windows: Ctrl + F5
+
+────────────────────────────────
+5. 로컬 확인
+────────────────────────────────
+GLB는 file:// 방식에서 차단될 수 있으므로 로컬 서버로 확인합니다.
+
+python3 -m http.server 8000
+http://localhost:8000
+
+Three.js는 jsDelivr CDN을 사용하므로 3D 인터랙션에는 인터넷 연결이 필요합니다.
+본문과 이미지 갤러리는 CDN이 실패해도 표시됩니다.
