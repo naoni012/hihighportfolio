@@ -136,7 +136,7 @@ function setActive(key, scroll=false){
     obj.userData.targetScale=active?1.15:.82;
     obj.userData.targetY=active?.16:0;
   });
-  if(scroll) document.querySelector(projectData[key].target).scrollIntoView({behavior:'smooth',block:'center'});
+  if(scroll) document.querySelector(projectData[key].target).scrollIntoView({behavior:'smooth',block:'start'});
 }
 projectButtons.forEach(btn=>btn.addEventListener('click',()=>setActive(btn.dataset.project,true)));
 

@@ -16,20 +16,25 @@
     revealItems.forEach(item => item.classList.add('visible', 'show'));
   }
 
-  // Scroll-dot navigation state.
-  const navDots = qsa('.nav-dot');
-  const sections = navDots
-    .map(dot => document.querySelector(dot.getAttribute('href')))
+  // Fixed navigation state: communicate the current section without adding a second floating navigation.
+  const headerLinks = qsa('.site-header .nav a');
+  const headerSections = headerLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
     .filter(Boolean);
-  if ('IntersectionObserver' in window && sections.length) {
-    const navObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const id = `#${entry.target.id}`;
-        navDots.forEach(dot => dot.classList.toggle('active', dot.getAttribute('href') === id));
+  if ('IntersectionObserver' in window && headerSections.length) {
+    const headerObserver = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      const id = `#${visible.target.id}`;
+      headerLinks.forEach(link => {
+        const active = link.getAttribute('href') === id;
+        if (active) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
       });
-    }, { rootMargin: '-38% 0px -48% 0px', threshold: 0 });
-    sections.forEach(section => navObserver.observe(section));
+    }, { rootMargin: '-24% 0px -66% 0px', threshold: [0, .1, .35] });
+    headerSections.forEach(section => headerObserver.observe(section));
   }
 
   // Project rail remains usable even if Three.js fails to load.
