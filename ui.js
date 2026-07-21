@@ -1,73 +1,62 @@
 (() => {
   const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Content reveal is independent from the Three.js CDN.
-  const revealItems = qsa('.reveal');
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver(entries => {
+  // Reveal
+  const revealItems = qsa('[data-reveal]');
+  if (!('IntersectionObserver' in window) || reducedMotion) {
+    revealItems.forEach(item => item.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible', 'show');
-        revealObserver.unobserve(entry.target);
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       });
-    }, { threshold: 0.12 });
-    revealItems.forEach(item => revealObserver.observe(item));
-  } else {
-    revealItems.forEach(item => item.classList.add('visible', 'show'));
+    }, { threshold: 0.1, rootMargin: '0px 0px -7% 0px' });
+    revealItems.forEach(item => observer.observe(item));
   }
 
-  // Fixed navigation state: communicate the current section without adding a second floating navigation.
-  const headerLinks = qsa('.site-header .nav a');
-  const headerSections = headerLinks
+  // Active navigation
+  const navLinks = qsa('.menu-nav a');
+  const sections = navLinks
     .map(link => document.querySelector(link.getAttribute('href')))
     .filter(Boolean);
-  if ('IntersectionObserver' in window && headerSections.length) {
-    const headerObserver = new IntersectionObserver(entries => {
-      const visible = entries
-        .filter(entry => entry.isIntersecting)
+  if ('IntersectionObserver' in window) {
+    const navObserver = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
       if (!visible) return;
-      const id = `#${visible.target.id}`;
-      headerLinks.forEach(link => {
-        const active = link.getAttribute('href') === id;
-        if (active) link.setAttribute('aria-current', 'true');
+      const href = `#${visible.target.id}`;
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === href) link.setAttribute('aria-current', 'true');
         else link.removeAttribute('aria-current');
       });
-    }, { rootMargin: '-24% 0px -66% 0px', threshold: [0, .1, .35] });
-    headerSections.forEach(section => headerObserver.observe(section));
+    }, { rootMargin: '-22% 0px -68% 0px', threshold: [0, .05, .25] });
+    sections.forEach(section => navObserver.observe(section));
   }
 
-  // Project rail remains usable even if Three.js fails to load.
-  const targetByProject = { danjo: '#danjo', hamon: '#hamon', resummer: '#summer' };
-  qsa('.rail-item').forEach(button => {
+  // Summer visual-system tabs
+  const tabButtons = qsa('[role="tab"]');
+  tabButtons.forEach(button => {
     button.addEventListener('click', () => {
-      if (window.__portfolioThreeReady) return;
-      qsa('.rail-item').forEach(item => item.classList.toggle('active', item === button));
-      const target = document.querySelector(targetByProject[button.dataset.project]);
-      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const list = button.closest('[role="tablist"]');
+      if (!list) return;
+      const windowRoot = list.closest('.system-window');
+      qsa('[role="tab"]', list).forEach(tab => tab.setAttribute('aria-selected', String(tab === button)));
+      qsa('[role="tabpanel"]', windowRoot).forEach(panel => {
+        const active = panel.id === button.getAttribute('aria-controls');
+        panel.hidden = !active;
+        panel.classList.toggle('is-active', active);
+      });
     });
   });
 
-  // Production document expander.
-  qsa('.doc-toggle').forEach(button => {
-    button.addEventListener('click', () => {
-      const target = document.getElementById(button.getAttribute('aria-controls'));
-      if (!target) return;
-      const willOpen = target.hasAttribute('hidden');
-      target.toggleAttribute('hidden', !willOpen);
-      button.setAttribute('aria-expanded', String(willOpen));
-      button.innerHTML = willOpen
-        ? '문서 접기 <span class="doc-toggle-icon">－</span>'
-        : '제작 문서 더 보기 (4) <span class="doc-toggle-icon">＋</span>';
-    });
-  });
-
-  // Image lightbox for document, character and environment sheets.
-  const lightbox = document.getElementById('image-lightbox');
+  // Image lightbox
+  const lightbox = document.getElementById('lightbox');
   const lightboxImage = lightbox?.querySelector('img');
-  const lightboxCaption = lightbox?.querySelector('figcaption');
-  const lightboxClose = lightbox?.querySelector('.lightbox-close');
-  let lastFocused = null;
+  const closeButton = lightbox?.querySelector('.lightbox-close');
+  let lastFocus = null;
 
   const closeLightbox = () => {
     if (!lightbox) return;
@@ -75,38 +64,32 @@
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('lightbox-open');
     if (lightboxImage) lightboxImage.src = '';
-    lastFocused?.focus?.();
+    lastFocus?.focus?.();
   };
 
-  const openLightbox = image => {
-    if (!lightbox || !lightboxImage || !lightboxCaption) return;
-    lastFocused = document.activeElement;
-    lightboxImage.src = image.currentSrc || image.src;
-    lightboxImage.alt = image.alt || '';
-    const figure = image.closest('figure');
-    lightboxCaption.textContent = figure?.querySelector('figcaption')?.innerText?.trim() || image.alt || '';
-    lightbox.classList.add('is-open');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('lightbox-open');
-    lightboxClose?.focus();
-  };
-
-  const zoomImages = [...new Set(qsa('[data-zoom], .doc-shot img, .dev-step img'))];
-  zoomImages.forEach(image => {
-    image.setAttribute('data-zoom', '');
-    image.setAttribute('tabindex', '0');
+  qsa('[data-zoom]').forEach(image => {
+    image.tabIndex = 0;
     image.setAttribute('role', 'button');
     image.setAttribute('aria-label', `${image.alt || '이미지'} 확대 보기`);
-    image.addEventListener('click', () => openLightbox(image));
+    const open = () => {
+      if (!lightbox || !lightboxImage) return;
+      lastFocus = document.activeElement;
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt || '';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+      closeButton?.focus();
+    };
+    image.addEventListener('click', open);
     image.addEventListener('keydown', event => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        openLightbox(image);
+        open();
       }
     });
   });
-
-  lightboxClose?.addEventListener('click', closeLightbox);
+  closeButton?.addEventListener('click', closeLightbox);
   lightbox?.addEventListener('click', event => {
     if (event.target === lightbox) closeLightbox();
   });
@@ -114,9 +97,52 @@
     if (event.key === 'Escape' && lightbox?.classList.contains('is-open')) closeLightbox();
   });
 
-  // Friendly fallback if the external 3D module is blocked.
-  window.setTimeout(() => {
-    const loading = document.querySelector('.stage-loading');
-    if (loading && loading.isConnected) loading.textContent = 'INTERACTIVE PREVIEW';
-  }, 5000);
+  // Subtle desktop-window tilt. Kept intentionally small for readability.
+  if (!reducedMotion && matchMedia('(pointer:fine)').matches) {
+    qsa('[data-tilt]').forEach(card => {
+      card.addEventListener('pointermove', event => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        card.style.setProperty('--tilt-y', `${(x * 3.2).toFixed(2)}deg`);
+        card.style.setProperty('--tilt-x', `${(-y * 3.2).toFixed(2)}deg`);
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--tilt-y', '0deg');
+        card.style.setProperty('--tilt-x', '0deg');
+      });
+    });
+  }
+
+  // CSS-only Danjo background gets lightweight generated sparks.
+  const emberField = document.querySelector('.ember-field');
+  if (emberField && !reducedMotion) {
+    for (let i = 0; i < 24; i += 1) {
+      const ember = document.createElement('i');
+      ember.className = 'ember';
+      ember.style.left = `${Math.random() * 100}%`;
+      ember.style.bottom = `${-10 + Math.random() * 28}%`;
+      ember.style.setProperty('--dur', `${5 + Math.random() * 7}s`);
+      ember.style.setProperty('--drift', `${-45 + Math.random() * 90}px`);
+      ember.style.animationDelay = `${-Math.random() * 9}s`;
+      ember.style.transform = `scale(${.55 + Math.random() * 1.3})`;
+      emberField.appendChild(ember);
+    }
+  }
+
+  // Hamon environment responds slightly to the pointer without compromising text.
+  const hamon = document.querySelector('.theme-hamon');
+  if (hamon && !reducedMotion && matchMedia('(pointer:fine)').matches) {
+    hamon.addEventListener('pointermove', event => {
+      const rect = hamon.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - .5) * 14;
+      const y = ((event.clientY - rect.top) / rect.height - .5) * 8;
+      hamon.style.setProperty('--world-x', `${x.toFixed(1)}px`);
+      hamon.style.setProperty('--world-y', `${y.toFixed(1)}px`);
+    });
+    hamon.addEventListener('pointerleave', () => {
+      hamon.style.setProperty('--world-x', '0px');
+      hamon.style.setProperty('--world-y', '0px');
+    });
+  }
 })();
