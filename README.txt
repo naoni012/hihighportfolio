@@ -1,33 +1,69 @@
-VISUAL CONTENT PORTFOLIO — DESKTOP UI REWORK
+신나은 — VISUAL CONTENT PORTFOLIO
+업데이트: 아이콘 리디자인 + 마스코트 + 폰트 교체 + 실명 표기 + 제작 문서 복원
 
-[배포]
-1. 이 ZIP을 컴퓨터에서 압축 해제합니다.
-2. GitHub의 기존 hihighportfolio 저장소에서 Add file → Upload files를 누릅니다.
-3. 압축 해제한 내부 파일과 assets 폴더 전체를 저장소 최상단에 올립니다.
-4. Commit directly to the main branch → Commit changes를 누릅니다.
-5. Vercel Deployments에서 최신 배포가 Ready인지 확인합니다.
-6. 기존 주소 https://hihighportfolio.vercel.app/ 를 강력 새로고침합니다.
-
-[필수 구조]
+────────────────────────────────
+1. GitHub에 올릴 구조
+────────────────────────────────
 index.html
 styles.css
 ui.js
+mascot.js      ← 신규. 빠뜨리면 마스코트가 안 나옵니다
 script.js
+README.txt
 assets/
   images/
   models/hamon_sculpt_master_WEB.glb
 
-[이번 개편]
-- 데스크톱/창 UI를 활용한 원페이지 디자인
-- 모든 유튜브 영상 16:9, 동일한 최대 폭과 중앙 정렬
-- 단조: 이미지 없는 CSS 배경 + 불씨 모션
-- 하몽: 제공한 언리얼 초원/집 이미지를 배경과 월드빌드 창에 적용
-- Summer, Again: 키비주얼과 캐릭터/공간/오브젝트를 탭으로 정리
-- 중복 통계, 긴 Overview, 읽기 어려운 보조 문서, 불필요한 Skills 설명 삭제
-- 하몽 기간 2026.05–08, Summer 공개 분량 20초 반영
-- 하몽 라벤더 벨벳 재질의 굿즈/호감도 설계 의도 반영
+────────────────────────────────
+2. 이번 변경
+────────────────────────────────
+[아이콘 — 실제 이미지로 교체]
+· 기존: CSS 그라디언트 + 글자 한 자(鍛/夏/R) → 앱스토어 목업 템플릿처럼 보였습니다.
+· 변경: 업로드해주신 3장을 잘라 512px 스퀘어클(초타원) 아이콘으로 제작했습니다.
+  icon-danjo.png   ← 모루 위 망치 스틸, 따뜻한 그레이딩 + 상단 광택
+  icon-hamon.png   ← 하몽 캐릭터(투명 배경), 라벤더 그라디언트 플레이트
+  icon-summer.png  ← 종이 나비(투명 배경), 크림→틸 플레이트
+· 모서리 광택과 그림자는 CSS로 처리해 다크/라이트 어디서나 또렷합니다.
 
-[주의]
-- ZIP 파일 자체를 GitHub에 올리지 말고 압축을 푼 내부 파일을 올립니다.
-- ui.js와 script.js를 빠뜨리면 탭/확대 보기/3D 모델이 동작하지 않습니다.
-- Three.js와 유튜브 임베드는 인터넷 연결이 필요합니다. 3D 로딩 실패 시 캐릭터 시트가 대체 이미지로 표시됩니다.
+[마스코트]
+· hamon-mascot.png — 하몽 캐릭터를 우측 하단 고정 마스코트로 배치했습니다.
+· 히어로를 지나면 등장하고, 위아래로 천천히 떠 있습니다.
+· 섹션에 들어설 때마다 짧은 말풍선이 뜹니다(각 1회, 3.6초 후 사라짐).
+· 클릭/엔터로 하몽 프로젝트로 이동합니다. 키보드 포커스 지원.
+· prefers-reduced-motion 설정 시 애니메이션과 말풍선이 꺼집니다.
+
+[폰트 — 3역할 체계]
+· 본문   Pretendard        한글 UI 가독성이 Noto Sans KR보다 확실히 좋습니다
+· 제목   Noto Serif KR     鍛造·夏夢 한자가 명조 계열에서 제대로 살아납니다
+· 데이터 IBM Plex Mono     창 제목·수치·라벨. "문서를 다루는 사람"이라는 정체성을
+                          폰트가 대신 말해줍니다
+· Pretendard는 jsDelivr, 나머지는 Google Fonts CDN을 씁니다.
+
+[실명 표기]
+· 상단 브랜드: 신나은 / SHIN NAEUN
+· 히어로 라벨: 신나은 · VISUAL CONTENT DIRECTOR
+· 페이지 타이틀·OG 태그에도 반영했습니다.
+
+[제작 문서 복원]
+· production_system.folder 창 안에 핵심 3장만 넣었습니다.
+  부서 통합 타임라인 / 41컷 스토리보드 Ver 2.3 / 크로마키 컬러 규정
+· 캡션은 "무슨 문서"가 아니라 "이 문서가 무엇을 해결했는지"로 썼습니다.
+· VP 촬영 현장 사진은 창 아래 별도 이미지로 분리했습니다.
+· 리드문 추가: "촬영 이틀이 사고 없이 끝나도록, 모든 부서가 같은 문서를 봤습니다."
+
+[정리]
+· 사용하지 않던 hamon-world-bg.webp를 삭제했습니다.
+
+────────────────────────────────
+3. 영상 매핑 — 배포 전 확인 필요
+────────────────────────────────
+단조   https://youtu.be/L3py_5rTnaA
+하몽   https://youtu.be/Bpn1hvm-twk
+Summer https://youtu.be/c-QibHWwHbk
+비공개 영상이라 제목 조회가 불가능합니다. 시크릿 창에서 직접 확인하세요.
+
+────────────────────────────────
+4. 로컬 확인
+────────────────────────────────
+python3 -m http.server 8000  →  http://localhost:8000
+(index.html 더블클릭 시 GLB가 CORS로 차단되어 3D 캐릭터가 안 보입니다)
